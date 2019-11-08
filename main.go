@@ -64,6 +64,22 @@ func shiba() (string, error) {
 	return r[0], nil
 }
 
+func tori() (string, error) {
+	resp, err := http.Get("https://some-random-api.ml/img/birb")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	var r struct {
+		URL string `json:"link"`
+	}
+	err = json.NewDecoder(resp.Body).Decode(&r)
+	if err != nil {
+		return "", err
+	}
+	return r.URL, nil
+}
+
 func main() {
 	exe, err := os.Executable()
 	if err != nil {
@@ -79,6 +95,8 @@ func main() {
 		uri, err = innu()
 	case "shiba":
 		uri, err = shiba()
+	case "tori":
+		uri, err = tori()
 	}
 	if err != nil {
 		log.Fatal(err)
