@@ -2,6 +2,8 @@
 
 にゃーん
 
+![SL](https://raw.githubusercontent.com/mattn/nyanko/master/screenshot.png)
+
 ## Usage
 
 ```
