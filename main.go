@@ -103,5 +103,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println()
 	fmt.Println(uri)
 }
