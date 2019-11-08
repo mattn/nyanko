@@ -50,6 +50,20 @@ func innu() (string, error) {
 	return r.URL, nil
 }
 
+func shiba() (string, error) {
+	resp, err := http.Get("http://shibe.online/api/shibes")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	var r []string
+	err = json.NewDecoder(resp.Body).Decode(&r)
+	if err != nil {
+		return "", err
+	}
+	return r[0], nil
+}
+
 func main() {
 	exe, err := os.Executable()
 	if err != nil {
@@ -57,10 +71,14 @@ func main() {
 	}
 	var uri string
 	switch filepath.Base(exe) {
+	default:
+		fallthrough
 	case "nyanko":
 		uri, err = nyanko()
 	case "innu":
 		uri, err = innu()
+	case "shiba":
+		uri, err = shiba()
 	}
 	if err != nil {
 		log.Fatal(err)
